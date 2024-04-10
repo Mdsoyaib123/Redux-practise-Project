@@ -4,60 +4,48 @@
 // store 
 const {createStore} = require('redux')
 
-const INCREMENT = 'INCREMENT'
-const DECREMENT = 'DECREMENT'
-const RESET = 'RESET'
+const ADD_USER='ADD_USER'
 
 const intialState ={
-    count:0
+    count:1,
+    user:['anis']
 }
 
-const IncrementAction =()=>{
-return {
-    type:INCREMENT
-}
-}
-const DecrementAction =()=>{
-return {
-    type:DECREMENT
-}
-}
-const ResetAction= ()=>{
-    return {
-        type:RESET
-    }
-}
 
-const reducer = (state=intialState,action)=>{
+const add_userAction =(value)=>{
+return {
+    type:ADD_USER,
+    payload:value
+}
+}
+const UserReducer = (state=intialState,action)=>{
 switch(action.type){
-    case INCREMENT:
+   
+    case ADD_USER:
         return{
-            ...state,
-            count: state.count + 1  
+            
+            user:[...state.user, action.payload],
+            count:state.count + 1 
         }
-    case DECREMENT:
-        return {
-            ...state,
-            count:state.count-1
-        }
-    case RESET:
-        return{
-            ...state,
-            count:0
-        }
+   
 }
 }
 
-const store = createStore(reducer)
+const store = createStore(UserReducer)
 store.subscribe(()=>{
     console.log(store.getState());
 })
 
-store.dispatch(IncrementAction())
-store.dispatch(IncrementAction())
-store.dispatch(IncrementAction())
-store.dispatch(IncrementAction())
-store.dispatch(IncrementAction())
-store.dispatch(IncrementAction())
-store.dispatch(DecrementAction())
-store.dispatch(DecrementAction())
+// store.dispatch(IncrementAction())
+// store.dispatch(IncrementAction())
+// store.dispatch(IncrementAction())
+// store.dispatch(IncrementAction())
+// store.dispatch(IncrementAction())
+// store.dispatch(IncrementAction())
+// store.dispatch(DecrementAction())
+// store.dispatch(DecrementAction())
+// store.dispatch(IncrementByValueAction(5))
+// store.dispatch(IncrementByValueAction(5))
+store.dispatch(add_userAction('sourav'))
+store.dispatch(add_userAction('rafi'))
+store.dispatch(add_userAction('fahim'))
